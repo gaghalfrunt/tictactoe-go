@@ -5,16 +5,22 @@ type Input interface {
 	NextMove() int
 }
 
+type Participant interface {
+	Mark() Mark
+	IsReady() bool
+	NextMove() int
+}
+
 type Player struct {
-	mark  string
+	mark  Mark
 	input Input
 }
 
-func NewPlayer(mark string, input Input) *Player {
+func NewPlayer(mark Mark, input Input) *Player {
 	return &Player{mark: mark, input: input}
 }
 
-func (player *Player) Mark() string {
+func (player *Player) Mark() Mark {
 	return player.mark
 }
 

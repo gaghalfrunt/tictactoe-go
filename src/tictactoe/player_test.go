@@ -13,13 +13,19 @@ var _ = Describe("Player", func() {
 
 	BeforeEach(func() {
 		inputSpy = new(InputSpy)
-		player = NewPlayer("x", inputSpy)
+		player = NewPlayer(X, inputSpy)
+	})
+
+	It("is a Participant", func() {
+		var player Participant = NewPlayer(X, inputSpy)
+
+		Expect(player).NotTo(BeNil())
 	})
 
 	It("has a mark", func() {
-		player := NewPlayer("x", nil)
+		player := NewPlayer(X, nil)
 
-		Expect(player.Mark()).To(Equal("x"))
+		Expect(player.Mark()).To(Equal(X))
 	})
 
 	It("has a way to provide a new move", func() {
@@ -48,6 +54,8 @@ type InputSpy struct {
 	NextMoveHasBeenCalled           bool
 }
 
+var _ Input = new(InputSpy)
+
 func (input *InputSpy) CanProvideNextMove() bool {
 	input.CanProvideNextMoveHasBeenCalled = true
 
@@ -59,5 +67,3 @@ func (input *InputSpy) NextMove() int {
 
 	return input.Move
 }
-
-var _ Input = new(InputSpy)
