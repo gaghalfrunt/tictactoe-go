@@ -23,11 +23,11 @@ func (board *Board) availableLocations() []int {
 	return freeLocations
 }
 
-func (board *Board) place(mark Mark, location int) {
+func (board *Board) Place(mark Mark, location int) {
 	board.cells[location-1] = mark
 }
 
-func (board *Board) content() map[int]Mark {
+func (board *Board) Content() map[int]Mark {
 	content := make(map[int]Mark)
 
 	for index, value := range board.cells {

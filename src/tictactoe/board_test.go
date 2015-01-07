@@ -17,16 +17,16 @@ var _ = Describe("Board", func() {
 	Context("with moves", func() {
 		It("occupies the location", func() {
 			board := Board{}
-			board.place("x", 1)
+			board.Place("x", 1)
 
 			Expect(board.availableLocations()).To(Equal([]int{2, 3, 4, 5, 6, 7, 8, 9}))
 		})
 
 		It("returns the state of the board", func() {
 			board := Board{}
-			board.place("x", 1)
-			board.place("o", 5)
-			board.place("x", 9)
+			board.Place("x", 1)
+			board.Place("o", 5)
+			board.Place("x", 9)
 
 			expectedContent := map[int]Mark{
 				1: "x", 2: "", 3: "",
@@ -34,7 +34,7 @@ var _ = Describe("Board", func() {
 				7: "", 8: "", 9: "x",
 			}
 
-			Expect(board.content()).To(Equal(expectedContent))
+			Expect(board.Content()).To(Equal(expectedContent))
 		})
 	})
 })
