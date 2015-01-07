@@ -5,12 +5,6 @@ type Input interface {
 	NextMove() int
 }
 
-type Participant interface {
-	Mark() Mark
-	IsReady() bool
-	NextMove() int
-}
-
 type Player struct {
 	mark  Mark
 	input Input

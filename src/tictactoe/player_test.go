@@ -16,12 +16,6 @@ var _ = Describe("Player", func() {
 		player = NewPlayer(X, inputSpy)
 	})
 
-	It("is a Participant", func() {
-		var player Participant = NewPlayer(X, inputSpy)
-
-		Expect(player).NotTo(BeNil())
-	})
-
 	It("has a mark", func() {
 		player := NewPlayer(X, nil)
 

@@ -8,7 +8,7 @@ import (
 var _ = Describe("Game", func() {
 	Context("Display", func() {
 		It("shows the board after a round", func() {
-			playerA := NewStubPlayer(X).WithMoves(1)
+			playerA := NewStubPlayer(X, 1)
 			playerB := NewStubPlayer(O)
 			output := new(SpyOutput)
 
@@ -22,8 +22,8 @@ var _ = Describe("Game", func() {
 
 	Context("Play Policy", func() {
 		It("switches players after each round", func() {
-			playerA := NewStubPlayer(X).WithMoves(1)
-			playerB := NewStubPlayer(O).WithMoves(9)
+			playerA := NewStubPlayer(X, 1)
+			playerB := NewStubPlayer(O, 9)
 			output := new(SpyOutput)
 
 			game := NewGame(playerA, playerB, output)
@@ -49,30 +49,23 @@ func (output *SpyOutput) ShowBoard(board Board) {
 	output.board = board
 }
 
-type StubPlayer struct {
-	*Player
+func NewStubPlayer(mark Mark, moves ...int) Player {
+	return *NewPlayer(mark, StubInput{moves})
+}
+
+type StubInput struct {
 	moves []int
 }
 
-var _ Participant = new(StubPlayer)
+var _ Input = new(StubInput)
 
-func NewStubPlayer(mark Mark) *StubPlayer {
-	return &StubPlayer{
-		Player: NewPlayer(mark, nil),
-	}
+func (input StubInput) CanProvideNextMove() bool {
+	return len(input.moves) > 0
 }
 
-func (player StubPlayer) NextMove() int {
-	move := player.moves[0]
-	player.moves = append(player.moves[:0], player.moves[1:]...)
+func (input StubInput) NextMove() int {
+	move := input.moves[0]
+	input.moves = append(input.moves[:0], input.moves[1:]...)
 
 	return move
-}
-
-func (player *StubPlayer) WithMoves(moves ...int) *StubPlayer {
-	for _, move := range moves {
-		player.moves = append(player.moves, move)
-	}
-
-	return player
 }
