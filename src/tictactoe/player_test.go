@@ -33,31 +33,8 @@ var _ = Describe("Player", func() {
 	})
 
 	It("provides the move from its input", func() {
-		inputSpy.Move = 42
-
-		theMove := player.NextMove()
+		player.NextMove()
 
 		Expect(inputSpy.NextMoveHasBeenCalled).To(Equal(true))
-		Expect(theMove).To(Equal(42))
 	})
 })
-
-type InputSpy struct {
-	Move                            int
-	CanProvideNextMoveHasBeenCalled bool
-	NextMoveHasBeenCalled           bool
-}
-
-var _ Input = new(InputSpy)
-
-func (input *InputSpy) CanProvideNextMove() bool {
-	input.CanProvideNextMoveHasBeenCalled = true
-
-	return true
-}
-
-func (input *InputSpy) NextMove() int {
-	input.NextMoveHasBeenCalled = true
-
-	return input.Move
-}

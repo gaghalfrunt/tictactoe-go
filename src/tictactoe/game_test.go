@@ -36,36 +36,3 @@ var _ = Describe("Game", func() {
 		})
 	})
 })
-
-type SpyOutput struct {
-	board                  Board
-	ShowBoardHasBeenCalled bool
-}
-
-var _ Output = new(SpyOutput)
-
-func (output *SpyOutput) ShowBoard(board Board) {
-	output.ShowBoardHasBeenCalled = true
-	output.board = board
-}
-
-func NewStubPlayer(mark Mark, moves ...int) Player {
-	return *NewPlayer(mark, StubInput{moves})
-}
-
-type StubInput struct {
-	moves []int
-}
-
-var _ Input = new(StubInput)
-
-func (input StubInput) CanProvideNextMove() bool {
-	return len(input.moves) > 0
-}
-
-func (input StubInput) NextMove() int {
-	move := input.moves[0]
-	input.moves = append(input.moves[:0], input.moves[1:]...)
-
-	return move
-}
