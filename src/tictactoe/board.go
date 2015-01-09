@@ -46,14 +46,14 @@ func (board *Board) Content() map[int]Mark {
 }
 
 func (board Board) IsFinished() bool {
-	if board.hasWinner() || board.HasDraw() {
+	if board.HasWinner() || board.HasDraw() {
 		return true
 	}
 
 	return false
 }
 
-func (board Board) hasWinner() bool {
+func (board Board) HasWinner() bool {
 	for _, line := range board.allLines() {
 		if line.hasWinner() {
 			return true
@@ -66,7 +66,7 @@ func (board Board) hasWinner() bool {
 func (board Board) HasDraw() bool {
 	availableMoves := board.availableLocations()
 
-	return len(availableMoves) == 0 && !board.hasWinner()
+	return len(availableMoves) == 0 && !board.HasWinner()
 }
 
 func (board Board) Winner() Mark {

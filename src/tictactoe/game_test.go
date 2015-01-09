@@ -14,9 +14,34 @@ var _ = Describe("Game", func() {
 
 			game := NewGame(playerA, playerB, output)
 
-			game.PlayRound()
+			game.Play()
 
 			Expect(output.ShowBoardHasBeenCalled).To(BeTrue())
+		})
+
+		It("announces a draw", func() {
+			playerA := NewStubPlayer(X, 3, 4, 5, 8, 9)
+			playerB := NewStubPlayer(O, 1, 2, 6, 7)
+			output := new(SpyOutput)
+
+			game := NewGame(playerA, playerB, output)
+
+			game.Play()
+
+			Expect(output.ShowDrawMessageHasBeenCalled).To(BeTrue())
+		})
+
+		It("announces a winner", func() {
+			playerA := NewStubPlayer(X, 1, 2, 3)
+			playerB := NewStubPlayer(O, 4, 5)
+			output := new(SpyOutput)
+
+			game := NewGame(playerA, playerB, output)
+
+			game.Play()
+
+			Expect(output.ShowWinnerMessageHasBeenCalled).To(BeTrue())
+			Expect(output.AnnouncedWinner).To(Equal(X))
 		})
 	})
 
@@ -28,11 +53,24 @@ var _ = Describe("Game", func() {
 
 			game := NewGame(playerA, playerB, output)
 
-			game.PlayRound()
-			game.PlayRound()
+			game.Play()
 
-			Expect(output.board.Content()[1]).To(Equal(X))
-			Expect(output.board.Content()[9]).To(Equal(O))
+			content := output.board.Content()
+
+			Expect(content[1]).To(Equal(X))
+			Expect(content[9]).To(Equal(O))
+		})
+
+		It("plays until finished", func() {
+			playerA := NewStubPlayer(X, 3, 4, 5, 8, 9)
+			playerB := NewStubPlayer(O, 1, 2, 6, 7)
+			output := new(SpyOutput)
+
+			game := NewGame(playerA, playerB, output)
+
+			game.Play()
+
+			Expect(game.IsFinished()).To(BeTrue())
 		})
 	})
 })
