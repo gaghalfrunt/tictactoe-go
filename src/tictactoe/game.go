@@ -17,12 +17,12 @@ func NewGame(playerA Player, playerB Player, output Output) Game {
 func (game *Game) Play() {
 	for {
 		if game.isOngoing() {
+			game.output.ShowBoard(game.board)
+
 			mark := game.players[0].Mark()
 			move := game.players[0].NextMove()
 
 			game.board.Place(mark, move)
-
-			game.output.ShowBoard(game.board)
 
 			if game.IsFinished() {
 				game.showResult()

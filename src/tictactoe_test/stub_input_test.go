@@ -1,4 +1,6 @@
-package tictactoe
+package tictactoe_test
+
+import . "tictactoe"
 
 var _ Input = new(StubInput)
 

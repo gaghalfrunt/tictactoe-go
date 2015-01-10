@@ -1,8 +1,10 @@
-package tictactoe
+package tictactoe_test
 
 import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+
+	. "tictactoe"
 )
 
 var _ = Describe("Board", func() {
@@ -10,7 +12,7 @@ var _ = Describe("Board", func() {
 		It("has all locations available", func() {
 			board := Board{}
 
-			Expect(board.availableLocations()).To(Equal([]int{1, 2, 3, 4, 5, 6, 7, 8, 9}))
+			Expect(board.AvailableLocations()).To(Equal([]int{1, 2, 3, 4, 5, 6, 7, 8, 9}))
 		})
 
 		It("is not finished", func() {
@@ -25,7 +27,7 @@ var _ = Describe("Board", func() {
 			board := Board{}
 			board.Place(X, 1)
 
-			Expect(board.availableLocations()).To(Equal([]int{2, 3, 4, 5, 6, 7, 8, 9}))
+			Expect(board.AvailableLocations()).To(Equal([]int{2, 3, 4, 5, 6, 7, 8, 9}))
 		})
 
 		It("returns the state of the board", func() {

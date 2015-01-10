@@ -19,7 +19,7 @@ type Board struct {
 	cells [9]Mark
 }
 
-func (board *Board) availableLocations() []int {
+func (board *Board) AvailableLocations() []int {
 	var freeLocations []int
 
 	for index, element := range board.cells {
@@ -64,7 +64,7 @@ func (board Board) HasWinner() bool {
 }
 
 func (board Board) HasDraw() bool {
-	availableMoves := board.availableLocations()
+	availableMoves := board.AvailableLocations()
 
 	return len(availableMoves) == 0 && !board.HasWinner()
 }

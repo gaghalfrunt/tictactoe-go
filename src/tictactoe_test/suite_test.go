@@ -1,4 +1,4 @@
-package tictactoe
+package tictactoe_test
 
 import (
 	. "github.com/onsi/ginkgo"
@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestTttGo(t *testing.T) {
+func TestTicTacToeSuite(t *testing.T) {
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "Tic Tac Toe Suite")
 }

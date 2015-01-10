@@ -1,14 +1,16 @@
-package tictactoe
+package tictactoe_test
 
 import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+
+	. "tictactoe"
 )
 
 var _ = Describe("Player", func() {
 	var (
 		inputSpy *InputSpy
-		player   *Player
+		player   Player
 	)
 
 	BeforeEach(func() {

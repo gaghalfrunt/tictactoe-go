@@ -1,8 +1,10 @@
-package tictactoe
+package tictactoe_test
 
 import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+
+	. "tictactoe"
 )
 
 var _ = Describe("Game", func() {
@@ -47,7 +49,7 @@ var _ = Describe("Game", func() {
 
 	Context("Play Policy", func() {
 		It("switches players after each round", func() {
-			playerA := NewStubPlayer(X, 1)
+			playerA := NewStubPlayer(X, 1, 3)
 			playerB := NewStubPlayer(O, 9)
 			output := new(SpyOutput)
 

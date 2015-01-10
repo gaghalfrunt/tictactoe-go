@@ -10,8 +10,8 @@ type Player struct {
 	input Input
 }
 
-func NewPlayer(mark Mark, input Input) *Player {
-	return &Player{mark: mark, input: input}
+func NewPlayer(mark Mark, input Input) Player {
+	return Player{mark: mark, input: input}
 }
 
 func (player *Player) Mark() Mark {
