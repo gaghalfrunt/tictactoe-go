@@ -5,4 +5,5 @@ type Output interface {
 	ShowDrawMessage()
 	ShowWinnerMessage(winner Mark)
 	ShowNextMoveMessage(nextPlayer Mark)
+	ShowInvalidMoveMessage()
 }

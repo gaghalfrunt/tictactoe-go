@@ -5,12 +5,13 @@ import . "tictactoe"
 var _ Output = new(SpyOutput)
 
 type SpyOutput struct {
-	board                            Board
-	AnnouncedWinner                  Mark
-	ShowBoardHasBeenCalled           bool
-	ShowDrawMessageHasBeenCalled     bool
-	ShowWinnerMessageHasBeenCalled   bool
-	ShowNextMoveMessageHasBeenCalled bool
+	board                               Board
+	AnnouncedWinner                     Mark
+	ShowBoardHasBeenCalled              bool
+	ShowDrawMessageHasBeenCalled        bool
+	ShowWinnerMessageHasBeenCalled      bool
+	ShowNextMoveMessageHasBeenCalled    bool
+	ShowInvalidMoveMessageHasBeenCalled bool
 }
 
 func (output *SpyOutput) ShowBoard(board Board) {
@@ -29,4 +30,8 @@ func (output *SpyOutput) ShowWinnerMessage(winner Mark) {
 
 func (output *SpyOutput) ShowNextMoveMessage(nextPlayer Mark) {
 	output.ShowNextMoveMessageHasBeenCalled = true
+}
+
+func (output *SpyOutput) ShowInvalidMoveMessage() {
+	output.ShowInvalidMoveMessageHasBeenCalled = true
 }

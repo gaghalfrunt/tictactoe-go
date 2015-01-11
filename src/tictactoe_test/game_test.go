@@ -57,6 +57,18 @@ var _ = Describe("Game", func() {
 
 			Expect(output.ShowNextMoveMessageHasBeenCalled).To(BeTrue())
 		})
+
+		It("displays an invalid move message", func() {
+			playerA := NewStubPlayer(X, 0, 1)
+			playerB := NewStubPlayer(O)
+			output := new(SpyOutput)
+
+			game := NewGame(playerA, playerB, output)
+
+			game.Play()
+
+			Expect(output.ShowInvalidMoveMessageHasBeenCalled).To(BeTrue())
+		})
 	})
 
 	Context("Play Policy", func() {

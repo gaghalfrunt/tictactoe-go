@@ -17,13 +17,8 @@ func NewGame(playerA Player, playerB Player, output Output) Game {
 func (game *Game) Play() {
 	for {
 		if game.isOngoing() {
-			game.output.ShowBoard(game.board)
-
-			mark := game.players[0].Mark()
-			game.output.ShowNextMoveMessage(mark)
-			move := game.players[0].NextMove()
-
-			game.board.Place(mark, move)
+			game.showBoard()
+			game.placeMoveOfNextPlayer()
 
 			if game.IsFinished() {
 				game.showResult()
@@ -45,7 +40,33 @@ func (game *Game) isOngoing() bool {
 }
 
 func (game *Game) nextPlayerIsReady() bool {
-	return game.players[0].IsReady()
+	return game.nextPlayer().IsReady()
+}
+
+func (game *Game) showBoard() {
+	game.output.ShowBoard(game.board)
+}
+
+func (game *Game) placeMoveOfNextPlayer() {
+	player := game.nextPlayer()
+	mark := player.Mark()
+
+	for {
+		game.output.ShowNextMoveMessage(mark)
+		move := player.NextMove()
+
+		err := game.board.Place(mark, move)
+
+		if err == nil {
+			break
+		}
+
+		game.output.ShowInvalidMoveMessage()
+	}
+}
+
+func (game *Game) nextPlayer() *Player {
+	return &game.players[0]
 }
 
 func (game *Game) switchPlayers() {

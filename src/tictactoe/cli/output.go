@@ -49,6 +49,10 @@ func (output *Output) ShowNextMoveMessage(nextPlayer tictactoe.Mark) {
 	output.write("Next move for %s: ", nextPlayer)
 }
 
+func (output *Output) ShowInvalidMoveMessage() {
+	output.write("Invalid move\n")
+}
+
 func (output *Output) write(content string, args ...interface{}) {
 	fmt.Fprintf(output.Writer, content, args...)
 	output.Writer.Flush()

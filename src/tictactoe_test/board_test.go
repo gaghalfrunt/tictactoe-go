@@ -150,4 +150,23 @@ var _ = Describe("Board", func() {
 			})
 		})
 	})
+
+	Context("errors", func() {
+		It("only allows available move locations", func() {
+			board := Board{}
+
+			err := board.Place(X, 0)
+
+			Expect(err).To(HaveOccurred())
+		})
+
+		It("doesn't place already occupied locations", func() {
+			board := Board{}
+			board.Place(X, 1)
+
+			err := board.Place(O, 1)
+
+			Expect(err).To(HaveOccurred())
+		})
+	})
 })

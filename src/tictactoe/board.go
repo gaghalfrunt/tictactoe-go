@@ -1,5 +1,7 @@
 package tictactoe
 
+import "errors"
+
 type Mark string
 
 const (
@@ -31,8 +33,14 @@ func (board *Board) AvailableLocations() []int {
 	return freeLocations
 }
 
-func (board *Board) Place(mark Mark, location int) {
+func (board *Board) Place(mark Mark, location int) error {
+	if board.isInvalidLocation(location) {
+		return errors.New("Invalid move")
+	}
+
 	board.cells[location-1] = mark
+
+	return nil
 }
 
 func (board *Board) Content() map[int]Mark {
@@ -77,6 +85,16 @@ func (board Board) Winner() Mark {
 	}
 
 	return ""
+}
+
+func (board *Board) isInvalidLocation(location int) bool {
+	for _, availableLocation := range board.AvailableLocations() {
+		if location == availableLocation {
+			return false
+		}
+	}
+
+	return true
 }
 
 func (board Board) allLines() []line {
