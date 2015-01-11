@@ -17,6 +17,6 @@ func (player *Player) IsReady() bool {
 	return player.input.CanProvideNextMove()
 }
 
-func (player *Player) NextMove() int {
-	return player.input.NextMove()
+func (player *Player) NextMove(board Board) int {
+	return player.input.NextMove(board)
 }

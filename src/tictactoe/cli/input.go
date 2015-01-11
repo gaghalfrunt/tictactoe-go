@@ -19,7 +19,7 @@ func (input *Input) CanProvideNextMove() bool {
 	return true
 }
 
-func (input *Input) NextMove() int {
+func (input *Input) NextMove(board tictactoe.Board) int {
 	reader := bufio.NewReader(input.Reader)
 
 	userInput, _ := reader.ReadString('\n')

@@ -2,5 +2,5 @@ package tictactoe
 
 type Input interface {
 	CanProvideNextMove() bool
-	NextMove() int
+	NextMove(board Board) int
 }

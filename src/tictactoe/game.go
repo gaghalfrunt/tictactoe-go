@@ -53,7 +53,7 @@ func (game *Game) placeMoveOfNextPlayer() {
 
 	for {
 		game.output.ShowNextMoveMessage(mark)
-		move := player.NextMove()
+		move := player.NextMove(game.board)
 
 		err := game.board.Place(mark, move)
 

@@ -35,7 +35,7 @@ var _ = Describe("Player", func() {
 	})
 
 	It("provides the move from its input", func() {
-		player.NextMove()
+		player.NextMove(Board{})
 
 		Expect(inputSpy.NextMoveHasBeenCalled).To(Equal(true))
 	})

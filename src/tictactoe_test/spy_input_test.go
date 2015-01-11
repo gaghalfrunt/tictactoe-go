@@ -15,7 +15,7 @@ func (input *InputSpy) CanProvideNextMove() bool {
 	return true
 }
 
-func (input *InputSpy) NextMove() int {
+func (input *InputSpy) NextMove(board Board) int {
 	input.NextMoveHasBeenCalled = true
 
 	return 1

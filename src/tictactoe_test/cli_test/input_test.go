@@ -6,6 +6,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
+	"tictactoe"
 	. "tictactoe/cli"
 )
 
@@ -14,7 +15,7 @@ var _ = Describe("CLI Input", func() {
 		reader := strings.NewReader("4")
 		input := Input{Reader: reader}
 
-		move := input.NextMove()
+		move := input.NextMove(tictactoe.Board{})
 
 		Expect(move).To(Equal(4))
 	})
