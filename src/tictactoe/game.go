@@ -20,6 +20,7 @@ func (game *Game) Play() {
 			game.output.ShowBoard(game.board)
 
 			mark := game.players[0].Mark()
+			game.output.ShowNextMoveMessage(mark)
 			move := game.players[0].NextMove()
 
 			game.board.Place(mark, move)

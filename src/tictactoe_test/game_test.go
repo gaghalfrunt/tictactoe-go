@@ -45,6 +45,18 @@ var _ = Describe("Game", func() {
 			Expect(output.ShowWinnerMessageHasBeenCalled).To(BeTrue())
 			Expect(output.AnnouncedWinner).To(Equal(X))
 		})
+
+		It("displays a message for requesting the next move", func() {
+			playerA := NewStubPlayer(X, 1)
+			playerB := NewStubPlayer(O)
+			output := new(SpyOutput)
+
+			game := NewGame(playerA, playerB, output)
+
+			game.Play()
+
+			Expect(output.ShowNextMoveMessageHasBeenCalled).To(BeTrue())
+		})
 	})
 
 	Context("Play Policy", func() {

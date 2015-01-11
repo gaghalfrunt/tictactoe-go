@@ -45,6 +45,10 @@ func (output *Output) ShowWinnerMessage(winner tictactoe.Mark) {
 	output.write("Game ended. Winner is: %s\n", winner)
 }
 
+func (output *Output) ShowNextMoveMessage(nextPlayer tictactoe.Mark) {
+	output.write("Next move for %s: ", nextPlayer)
+}
+
 func (output *Output) write(content string, args ...interface{}) {
 	fmt.Fprintf(output.Writer, content, args...)
 	output.Writer.Flush()

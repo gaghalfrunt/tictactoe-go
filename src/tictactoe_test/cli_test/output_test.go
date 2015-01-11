@@ -47,4 +47,10 @@ var _ = Describe("CLI Output", func() {
 		Expect(buffer.String()).To(ContainSubstring("4 | o | 6"))
 		Expect(buffer.String()).To(ContainSubstring("7 | 8 | x"))
 	})
+
+	It("show a request message for the next move", func() {
+		output.ShowNextMoveMessage(tictactoe.O)
+
+		Expect(buffer.String()).To(ContainSubstring("Next move for o"))
+	})
 })
