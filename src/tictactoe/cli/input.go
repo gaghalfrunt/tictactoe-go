@@ -2,8 +2,7 @@ package cli
 
 import (
 	"bufio"
-	"fmt"
-	"os"
+	"io"
 	"strconv"
 	"strings"
 
@@ -11,6 +10,7 @@ import (
 )
 
 type Input struct {
+	Reader io.Reader
 }
 
 var _ tictactoe.Input = new(Input)
@@ -20,11 +20,10 @@ func (input *Input) CanProvideNextMove() bool {
 }
 
 func (input *Input) NextMove() int {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Next move: ")
-	text, _ := reader.ReadString('\n')
-	move, _ := strconv.ParseInt(strings.TrimSpace(text), 10, 0)
-	theMove := int(move)
+	reader := bufio.NewReader(input.Reader)
 
-	return theMove
+	userInput, _ := reader.ReadString('\n')
+	move, _ := strconv.Atoi(strings.TrimSpace(userInput))
+
+	return move
 }
