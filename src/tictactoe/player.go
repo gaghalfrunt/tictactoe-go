@@ -18,5 +18,5 @@ func (player *Player) IsReady() bool {
 }
 
 func (player *Player) NextMove(board Board) int {
-	return player.input.NextMove(board)
+	return player.input.NextMove(board, player.mark)
 }

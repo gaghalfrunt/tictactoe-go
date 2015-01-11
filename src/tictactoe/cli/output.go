@@ -18,7 +18,8 @@ func (output *Output) ShowBoard(board tictactoe.Board) {
 	var linearizedBoard []interface{}
 	content := board.Content()
 
-	boardTemplate := " %s | %s | %s\n" +
+	boardTemplate := "\n" +
+		" %s | %s | %s\n" +
 		"----------\n" +
 		" %s | %s | %s\n" +
 		"----------\n" +

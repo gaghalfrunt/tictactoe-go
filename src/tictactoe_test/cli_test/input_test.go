@@ -15,7 +15,7 @@ var _ = Describe("CLI Input", func() {
 		reader := strings.NewReader("4")
 		input := Input{Reader: reader}
 
-		move := input.NextMove(tictactoe.Board{})
+		move := input.NextMove(tictactoe.Board{}, tictactoe.X)
 
 		Expect(move).To(Equal(4))
 	})
