@@ -1,10 +1,5 @@
 package tictactoe
 
-type Input interface {
-	CanProvideNextMove() bool
-	NextMove() int
-}
-
 type Player struct {
 	mark  Mark
 	input Input
