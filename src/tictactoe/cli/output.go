@@ -14,16 +14,16 @@ type Output struct {
 
 var _ tictactoe.Output = new(Output)
 
+const boardTemplate = "\n" +
+	" %s | %s | %s\n" +
+	"----------\n" +
+	" %s | %s | %s\n" +
+	"----------\n" +
+	" %s | %s | %s\n\n"
+
 func (output *Output) ShowBoard(board tictactoe.Board) {
 	var linearizedBoard []interface{}
 	content := board.Content()
-
-	boardTemplate := "\n" +
-		" %s | %s | %s\n" +
-		"----------\n" +
-		" %s | %s | %s\n" +
-		"----------\n" +
-		" %s | %s | %s\n\n"
 
 	for location := 1; location <= len(board.Content()); location++ {
 		mark := content[location]
