@@ -74,6 +74,8 @@ func (game *Game) switchPlayers() {
 }
 
 func (game *Game) showResult() {
+	game.showBoard()
+
 	if game.board.HasDraw() {
 		game.output.ShowDrawMessage()
 	} else {
