@@ -2,20 +2,20 @@ package tictactoe_test
 
 import . "tictactoe"
 
-var _ Input = new(InputSpy)
+var _ Input = new(SpyInput)
 
-type InputSpy struct {
+type SpyInput struct {
 	CanProvideNextMoveHasBeenCalled bool
 	NextMoveHasBeenCalled           bool
 }
 
-func (input *InputSpy) CanProvideNextMove() bool {
+func (input *SpyInput) CanProvideNextMove() bool {
 	input.CanProvideNextMoveHasBeenCalled = true
 
 	return true
 }
 
-func (input *InputSpy) NextMove(board Board, mark Mark) int {
+func (input *SpyInput) NextMove(board Board, mark Mark) int {
 	input.NextMoveHasBeenCalled = true
 
 	return 1
