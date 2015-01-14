@@ -23,9 +23,12 @@ To set up the basic environment, please follow this steps.
    Please do so by referring to the [official Go website](https://golang.org/doc/install)
    and follow their instructions for downloading and installing.
 
+    Alternatively, Go can be installed with via Homebrew, too (e.g. `brew install go`).
+
 2. After Go is installed, a tool called `gpm` (Go Package Manager) is needed.
    [The documentation of it](https://github.com/pote/gpm) mentions Homebrew as the
    preferred installation method.  
+
    This is done via your terminal by executing:
 
    `brew install gpm`
@@ -34,9 +37,11 @@ To set up the basic environment, please follow this steps.
    Its purpose is to ease the handling of one or more [Go Workspaces](https://golang.org/doc/code.html#Workspaces).  
    [The documentation of that tool](https://github.com/pote/gvp) mentions Homebrew as the
    preferred installation method, too.  
-   Please do so by also executing the following installation command in your terminal:
+
+   Please do so by executing the following installation command in your terminal:
 
    `brew install gvp`
+
 
 ### Cloning or Downloading this Repository
 
@@ -54,9 +59,11 @@ or by [downloading the zip archive](https://github.com/gaghalfrunt/tictactoe-go/
 
 If you're not in the terminal yet, now is the time to do so. Navigate to the directory where this repository has been downloaded or cloned.
 
+### Setting up the Environment
+
 Before running the game, make sure to download and install all dependencies, by executing:
 ```
-gpm init
+gpm install
 ```
 
 Then set the current workspace for Go with
@@ -68,13 +75,32 @@ Now everything is set for the environment and dependencies.
 
 ### Run the Game
 
-For starting the game a `main` package executable is available that can be executed with
+For starting the game a [`main` package](https://golang.org/doc/code.html#Command) is available at `src/tictactoe.go` that can be directly executed with
+
 ```
-go run src/main.go
+go run src/tictactoe.go
 ```
 
-### Run the Tests
-For testing, a framework called [&ldquo;Ginkgo&rdquo;](http://onsi.github.io/ginkgo/) is used. After the dependencies have been installed (by executing `gpm init` before), the `ginkgo` command is available on your system.
+Alternatively this file can be compiled into an executable and installed into the current Workspace via
+
+```
+go install src/tictactoe.go
+```
+
+Now the file `tictactoe` is available in the `$PATH` and can be executed directly.
+
+
+## Run the Tests
+
+For testing, [Ginkgo](http://onsi.github.io/ginkgo/) is used.
+
+It comes with a custom executable to run the tests. To enable it please execute the two following commands in order to install Ginkgo in your environment:
+```
+go get github.com/onsi/ginkgo/ginkgo
+go get github.com/onsi/gomega
+```
+
+After the dependencies have been installed, the `ginkgo` command is available on your system.
 
 Executing all available suites/tests is done by
 ```
