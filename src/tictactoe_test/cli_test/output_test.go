@@ -22,41 +22,74 @@ var _ = Describe("CLI Output", func() {
 		output = Output{Writer: bufio.NewWriter(&buffer)}
 	})
 
-	It("announces a draw", func() {
-		output.ShowDrawMessage()
+	Context("Game Output", func() {
+		It("announces a draw", func() {
+			output.ShowDrawMessage()
 
-		Expect(buffer.String()).To(ContainSubstring("Game ended in a draw"))
+			Expect(buffer.String()).To(ContainSubstring("Game ended in a draw"))
+		})
+
+		It("announces a winner", func() {
+			output.ShowWinnerMessage(tictactoe.X)
+
+			Expect(buffer.String()).To(ContainSubstring("Winner is: x"))
+		})
+
+		It("prints the board content", func() {
+			board := tictactoe.Board{}
+
+			board.Place(tictactoe.X, 1)
+			board.Place(tictactoe.O, 5)
+			board.Place(tictactoe.X, 9)
+
+			output.ShowBoard(board)
+
+			Expect(buffer.String()).To(ContainSubstring("x | 2 | 3"))
+			Expect(buffer.String()).To(ContainSubstring("4 | o | 6"))
+			Expect(buffer.String()).To(ContainSubstring("7 | 8 | x"))
+		})
+
+		It("shows a request message for the next move", func() {
+			output.ShowNextMoveMessage(tictactoe.O)
+
+			Expect(buffer.String()).To(ContainSubstring("Next move for o"))
+		})
+
+		It("shows an error message for invalid moves", func() {
+			output.ShowInvalidMoveMessage()
+
+			Expect(buffer.String()).To(ContainSubstring("Invalid move"))
+		})
 	})
 
-	It("announces a winner", func() {
-		output.ShowWinnerMessage(tictactoe.X)
+	Context("Game mode selection", func() {
+		It("prints a list of possible options", func() {
+			modes := []string{
+				"Human vs. Human",
+				"Human vs. Computer",
+				"Computer vs. Human",
+				"Computer vs. Computer",
+			}
 
-		Expect(buffer.String()).To(ContainSubstring("Winner is: x"))
-	})
+			output.ShowGameModes(modes)
 
-	It("prints the board content", func() {
-		board := tictactoe.Board{}
+			Expect(buffer.String()).To(ContainSubstring("Available Game Modes"))
+			Expect(buffer.String()).To(ContainSubstring("1. Human vs. Human"))
+			Expect(buffer.String()).To(ContainSubstring("2. Human vs. Computer"))
+			Expect(buffer.String()).To(ContainSubstring("3. Computer vs. Human"))
+			Expect(buffer.String()).To(ContainSubstring("4. Computer vs. Computer"))
+		})
 
-		board.Place(tictactoe.X, 1)
-		board.Place(tictactoe.O, 5)
-		board.Place(tictactoe.X, 9)
+		It("asks for a mode", func() {
+			output.ShowGameModePrompt()
 
-		output.ShowBoard(board)
+			Expect(buffer.String()).To(ContainSubstring("Game Mode to play: "))
+		})
 
-		Expect(buffer.String()).To(ContainSubstring("x | 2 | 3"))
-		Expect(buffer.String()).To(ContainSubstring("4 | o | 6"))
-		Expect(buffer.String()).To(ContainSubstring("7 | 8 | x"))
-	})
+		It("shows an error message for invalid Game Mode selection", func() {
+			output.ShowInvalidGameModeMessage()
 
-	It("shows a request message for the next move", func() {
-		output.ShowNextMoveMessage(tictactoe.O)
-
-		Expect(buffer.String()).To(ContainSubstring("Next move for o"))
-	})
-
-	It("shows an error message for invalid moves", func() {
-		output.ShowInvalidMoveMessage()
-
-		Expect(buffer.String()).To(ContainSubstring("Invalid move"))
+			Expect(buffer.String()).To(ContainSubstring("Invalid game mode"))
+		})
 	})
 })

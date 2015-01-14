@@ -20,10 +20,14 @@ func (input *Input) CanProvideNextMove() bool {
 }
 
 func (input *Input) NextMove(board tictactoe.Board, mark tictactoe.Mark) int {
+	return input.ReadInt()
+}
+
+func (input *Input) ReadInt() int {
 	reader := bufio.NewReader(input.Reader)
 
 	userInput, _ := reader.ReadString('\n')
-	move, _ := strconv.Atoi(strings.TrimSpace(userInput))
+	value, _ := strconv.Atoi(strings.TrimSpace(userInput))
 
-	return move
+	return value
 }

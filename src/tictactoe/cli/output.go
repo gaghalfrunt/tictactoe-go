@@ -39,7 +39,7 @@ func (output *Output) ShowBoard(board tictactoe.Board) {
 }
 
 func (output *Output) ShowDrawMessage() {
-	output.write("Game ended in a draw.")
+	output.write("Game ended in a draw.\n")
 }
 
 func (output *Output) ShowWinnerMessage(winner tictactoe.Mark) {
@@ -52,6 +52,22 @@ func (output *Output) ShowNextMoveMessage(nextPlayer tictactoe.Mark) {
 
 func (output *Output) ShowInvalidMoveMessage() {
 	output.write("Invalid move\n")
+}
+
+func (output *Output) ShowGameModePrompt() {
+	output.write("Game Mode to play: ")
+}
+
+func (output *Output) ShowGameModes(modes []string) {
+	output.write("Available Game Modes\n\n")
+
+	for index, identifier := range modes {
+		output.write("%d. %s\n", index+1, identifier)
+	}
+}
+
+func (output *Output) ShowInvalidGameModeMessage() {
+	output.write("Invalid game mode\n")
 }
 
 func (output *Output) write(content string, args ...interface{}) {
