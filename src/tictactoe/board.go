@@ -87,6 +87,17 @@ func (board Board) Winner() Mark {
 	return ""
 }
 
+func (board Board) Value() float64 {
+	if board.HasDraw() {
+		return 0.0
+	}
+
+	cellsAvailable := float64(len(board.cells))
+	movesMade := float64(len(board.AvailableLocations()))
+
+	return 1.0 / (cellsAvailable - movesMade)
+}
+
 func (board *Board) isInvalidLocation(location int) bool {
 	for _, availableLocation := range board.AvailableLocations() {
 		if location == availableLocation {

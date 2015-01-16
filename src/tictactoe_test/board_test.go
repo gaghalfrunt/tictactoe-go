@@ -169,4 +169,39 @@ var _ = Describe("Board", func() {
 			Expect(err).To(HaveOccurred())
 		})
 	})
+
+	Context("rating", func() {
+		It("equals 0 for when draw", func() {
+			board := Board{}
+			board.Place(O, 1)
+			board.Place(O, 2)
+			board.Place(X, 3)
+
+			board.Place(X, 4)
+			board.Place(X, 5)
+			board.Place(O, 6)
+
+			board.Place(O, 7)
+			board.Place(X, 8)
+			board.Place(X, 9)
+
+			Expect(board.Value()).To(Equal(0.0))
+		})
+
+		It("values boards with early wins higher", func() {
+			boardA := Board{}
+			boardA.Place(X, 1)
+			boardA.Place(X, 2)
+			boardA.Place(X, 3)
+
+			boardB := Board{}
+			boardB.Place(X, 1)
+			boardB.Place(X, 2)
+			boardB.Place(X, 3)
+			boardB.Place(O, 4)
+			boardB.Place(O, 5)
+
+			Expect(boardA.Value()).To(BeNumerically(">", boardB.Value()))
+		})
+	})
 })

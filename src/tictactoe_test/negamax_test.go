@@ -29,6 +29,7 @@ var _ = Describe("AI", func() {
 	It("blocks winning states", func() {
 		Expect(boardWith("xx-------").next(O)).To(Equal(3))
 		Expect(boardWith("x-------x").next(O)).To(Equal(5))
+		Expect(boardWith("xox-o-oxx").next(O)).To(Equal(6))
 	})
 
 	It("blocks a possible fork", func() {
